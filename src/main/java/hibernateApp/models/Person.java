@@ -4,6 +4,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 @Entity
 @Table(name = "Person")
@@ -21,6 +22,9 @@ public class Person {
     @Min(value = 0, message = "Age should be greater than 0")
     @Column(name = "age")
     private int age;
+
+    @OneToMany(mappedBy = "owner")
+    private List<Book> books;
 
     public Person() {
 
