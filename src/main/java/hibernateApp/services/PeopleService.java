@@ -45,7 +45,4 @@ public class PeopleService {
         peopleRepository.deleteById(id);
     }
 
-    public void test() {
-        System.out.println("debug!");
-    }
 }

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>New book</title>
+</head>
+<body>
+
+<form th:method="POST" th:action="@{/books}" th:object="${book}">
+  <label for="bookName">Enter book name: </label>
+  <input type="text" th:field="*{bookName}" id="bookName"/>
+  <div style="color:red" th:if="${#fields.hasErrors('bookName')}" th:errors="*{bookName}">Book name Error</div>
+  <br/>
+  <label for="year">Enter year: </label>
+  <input type="text" th:field="*{year}" id="year"/>
+  <div style="color:red" th:if="${#fields.hasErrors('year')}" th:errors="*{year}">Year Error</div>
+  <br/>
+  <label for="author">Enter author: </label>
+  <input type="text" th:field="*{author}" id="author"/>
+  <div style="color:red" th:if="${#fields.hasErrors('author')}" th:errors="*{author}">Author Error</div>
+  <br/>
+  <label>Choose owner: </label>
+    <select th:field="*{owner.id}">
+      <option th:each="user : ${users}" th:value="${user.id}" th:text="${user.getName()}"></option>
+    </select>
+  <div style="color:red" th:if="${#fields.hasErrors('owner')}" th:errors="*{owner}">Owner Error</div>
+  <br/>
+  <input type="submit" value="Create!"/>
+</form>
+
+</body>
+</html>

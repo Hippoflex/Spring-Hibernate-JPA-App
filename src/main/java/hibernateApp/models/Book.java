@@ -60,12 +60,12 @@ public class Book {
         this.id = id;
     }
 
-    public String getName() {
+    public String getBookName() {
         return bookName;
     }
 
-    public void setName(String name) {
-        this.bookName = name;
+    public void setBookName(String bookName) {
+        this.bookName = bookName;
     }
 
     public String getAuthor() {

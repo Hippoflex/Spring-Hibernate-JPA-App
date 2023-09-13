@@ -17,22 +17,15 @@ import javax.validation.Valid;
 public class PeopleController {
 
     private final PeopleService peopleService;
-    private final BooksService booksService;
 
     @Autowired
     public PeopleController(PeopleService peopleService, BooksService booksService) {
         this.peopleService = peopleService;
-        this.booksService = booksService;
     }
 
     @GetMapping()
     public String index(Model model) {
         model.addAttribute("people", peopleService.findAll());
-
-        booksService.findByBookName("Onegin");
-        booksService.findByOwner(peopleService.findAll().get(0));
-
-        peopleService.test();
         return "people/index";
     }
 
