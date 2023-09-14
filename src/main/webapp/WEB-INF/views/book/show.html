@@ -9,9 +9,9 @@
     VALUE</p>
 <p th:text="${books.getId()}">VALUE</p>
 
-<a th:href="@{/book/{id}/edit(id=${books.getId()})}">Edit</a>
+<a th:href="@{/books/{id}/edit(id=${books.getId()})}">Edit</a>
 
-<form th:method="DELETE" th:action="@{/book/{id}(id=${books.getId()})}">
+<form th:method="DELETE" th:action="@{/books/{id}(id=${books.getId()})}">
     <input type="submit" value="Delete"/>
 </form>
 </body>

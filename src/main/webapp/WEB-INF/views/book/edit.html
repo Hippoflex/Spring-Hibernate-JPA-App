@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Update person</title>
+</head>
+<body>
+
+<form th:method="PATCH" th:action="@{/books/{id}(id=${book.id})}" th:object="${book}">
+    <label for="bookName">Enter book name: </label>
+    <input type="text" th:field="*{bookName}" id="bookName"/>
+    <div style="color:red" th:if="${#fields.hasErrors('bookName')}" th:errors="*{bookName}">Book Name Error</div>
+    <br/>
+    <label for="year">Enter year: </label>
+    <input type="text" th:field="*{year}" id="year"/>
+    <div style="color:red" th:if="${#fields.hasErrors('year')}" th:errors="*{year}">Year Error</div>
+    <br/>
+    <label for="author">Enter author: </label>
+    <input type="text" th:field="*{author}" id="author"/>
+    <div style="color:red" th:if="${#fields.hasErrors('author')}" th:errors="*{author}">Author Error</div>
+    <br/>
+    <label>Choose owner: </label>
+    <div style="color:red" th:if="${#fields.hasErrors('owner')}" th:errors="*{owner}">Owner Error</div>
+    <select th:field="*{owner.id}">
+        <option th:each="user : ${users}" th:value="${user.id}" th:text="${user.getName()}"></option>
+    </select>
+
+
+    <br/>
+    <input type="submit" value="Update!"/>
+</form>
+
+</body>
+</html>
