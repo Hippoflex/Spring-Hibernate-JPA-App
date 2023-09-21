@@ -1,9 +1,12 @@
 package hibernateApp.models;
 
+import org.springframework.transaction.annotation.Transactional;
+
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
+import java.util.Date;
 
 @Entity
 @Table(name = "Book")
@@ -27,13 +30,21 @@ public class Book {
     @Column(name = "year")
     private int year;
 
+    @Column(name = "picked_at")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date pickedAt;
+
     @ManyToOne
     @JoinColumn(name = "person_id", referencedColumnName = "id")
     private Person owner;
 
+    @Transient
+    private boolean deprecatedBook;
+
     public Book() {
 
     }
+
 
     public Book(String bookName, String author, int year) {
         this.bookName = bookName;
@@ -90,5 +101,21 @@ public class Book {
 
     public void setOwner(Person owner) {
         this.owner = owner;
+    }
+
+    public Date getPickedAt() {
+        return pickedAt;
+    }
+
+    public void setPickedAt(Date pickedAt) {
+        this.pickedAt = pickedAt;
+    }
+
+    public boolean isDeprecatedBook() {
+        return deprecatedBook;
+    }
+
+    public void setDeprecatedBook(boolean deprecatedBook) {
+        this.deprecatedBook = deprecatedBook;
     }
 }

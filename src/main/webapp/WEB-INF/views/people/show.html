@@ -10,8 +10,21 @@
 
 <a th:href="@{/people/{id}/edit(id=${person.getId()})}">Edit</a>
 
+
 <form th:method="DELETE" th:action="@{/people/{id}(id=${person.getId()})}">
     <input type="submit" value="Delete"/>
 </form>
+
+<br/>
+<hr/>
+
+<div th:if="${#lists.isEmpty(personBooks)}">
+    <p th:text="${'У пользователя пока нет книг'}"></p>
+</div>
+
+<tr th:each="book: ${personBooks}">
+    <p th:style="${book.deprecatedBook == true ? 'color:black' : 'color:red'}" th:text="${book.bookName + ', ' + book.author + ', ' + book.year}" />
+</tr>
+
 </body>
 </html>

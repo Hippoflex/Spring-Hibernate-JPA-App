@@ -5,6 +5,8 @@ import hibernateApp.models.Person;
 import hibernateApp.services.BooksService;
 import hibernateApp.services.PeopleService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -28,8 +30,12 @@ public class BookController {
     }
 
     @GetMapping()
-    public String index(Model model) {
-        model.addAttribute("books", booksService.findAll());
+    public String index(Model model,
+                        @RequestParam(value = "page", defaultValue = "0") int page,
+                        @RequestParam(value = "size", defaultValue = "100") int size,
+                        @RequestParam(value = "sort", defaultValue = "year") String sort
+    ) {
+        model.addAttribute("books", booksService.findAll(PageRequest.of(page, size, Sort.by(sort))));
         return "book/index";
     }
 
@@ -74,9 +80,24 @@ public class BookController {
         return "redirect:/books";
     }
 
+
     @DeleteMapping("/{id}")
     public String delete(@PathVariable("id") int id) {
         booksService.delete(id);
         return "redirect:/books";
+    }
+
+    @GetMapping("/search")
+    public String searchPage(Model model) {
+        List<Book> allBooks = booksService.findAll();
+        model.addAttribute("books", allBooks);
+        return "book/search";
+    }
+
+    @PostMapping("/search")
+    public String searchBooks(@RequestParam("prefix") String prefix, Model model) {
+        List<Book> searchResults = booksService.findByBookNameStartingWith(prefix);
+        model.addAttribute("books", searchResults);
+        return "book/search";
     }
 }

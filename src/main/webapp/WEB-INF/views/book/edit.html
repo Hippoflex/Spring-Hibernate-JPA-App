@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Update person</title>
+    <title>Update book</title>
 </head>
 <body>
 
@@ -22,8 +22,12 @@
     <label>Choose owner: </label>
     <div style="color:red" th:if="${#fields.hasErrors('owner')}" th:errors="*{owner}">Owner Error</div>
     <select th:field="*{owner.id}">
-        <option th:each="user : ${users}" th:value="${user.id}" th:text="${user.getName()}"></option>
+        <option value="0">select option</option>
+        <option th:each="user : ${users}" th:value="${user.id}" th:text="${user?.name}"
+                th:selected="${user.id == book.owner.id}"></option>
     </select>
+
+
 
 
     <br/>

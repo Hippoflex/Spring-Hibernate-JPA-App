@@ -1,5 +1,6 @@
 package hibernateApp.controllers;
 
+import hibernateApp.models.Book;
 import hibernateApp.services.BooksService;
 import hibernateApp.services.PeopleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import hibernateApp.models.Person;
 
 import javax.validation.Valid;
+import java.util.List;
 
 
 @Controller
@@ -17,10 +19,12 @@ import javax.validation.Valid;
 public class PeopleController {
 
     private final PeopleService peopleService;
+    private final BooksService booksService;
 
     @Autowired
     public PeopleController(PeopleService peopleService, BooksService booksService) {
         this.peopleService = peopleService;
+        this.booksService = booksService;
     }
 
     @GetMapping()
@@ -31,7 +35,16 @@ public class PeopleController {
 
     @GetMapping("/{id}")
     public String show(@PathVariable("id") int id, Model model) {
-        model.addAttribute("person", peopleService.findOne(id));
+        Person person = peopleService.findOne(id);
+        List<Book> books = booksService.findByOwner(person);
+
+        for (Book book: books) {
+            book.setDeprecatedBook(booksService.checkDeprecatedBook(book));
+        }
+
+        model.addAttribute("person", person);
+        model.addAttribute("personBooks", books);
+
         return "people/show";
     }
 

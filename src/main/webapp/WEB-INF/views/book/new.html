@@ -19,12 +19,12 @@
   <input type="text" th:field="*{author}" id="author"/>
   <div style="color:red" th:if="${#fields.hasErrors('author')}" th:errors="*{author}">Author Error</div>
   <br/>
-  <label>Choose owner: </label>
-    <select th:field="*{owner.id}">
-      <option th:each="user : ${users}" th:value="${user.id}" th:text="${user.getName()}"></option>
-    </select>
-  <div style="color:red" th:if="${#fields.hasErrors('owner')}" th:errors="*{owner}">Owner Error</div>
-  <br/>
+<!--  <label>Choose owner: </label>-->
+<!--    <select th:field="*{owner.id}">-->
+<!--      <option th:each="user : ${users}" th:value="${user.id}" th:text="${user.getName()}"></option>-->
+<!--    </select>-->
+<!--  <div style="color:red" th:if="${#fields.hasErrors('owner')}" th:errors="*{owner}">Owner Error</div>-->
+<!--  <br/>-->
   <input type="submit" value="Create!"/>
 </form>
 

@@ -5,13 +5,13 @@
     <title>Book Show</title>
 </head>
 <body>
-<p th:text="${books.getBookName() + ', ' + books.getYear() + ', ' + books.getAuthor() + ', ' + books.getOwner().getName()}">
+<p th:text="${books.bookName + ', ' + books.year + ', ' + books.author + ', '} + ${#objects.nullSafe(books?.owner?.name,'Книга не занята')}">
     VALUE</p>
-<p th:text="${books.getId()}">VALUE</p>
+<p th:text="${books.id}">VALUE</p>
 
-<a th:href="@{/books/{id}/edit(id=${books.getId()})}">Edit</a>
+<a th:href="@{/books/{id}/edit(id=${books.id})}">Edit</a>
 
-<form th:method="DELETE" th:action="@{/books/{id}(id=${books.getId()})}">
+<form th:method="DELETE" th:action="@{/books/{id}(id=${books.id})}">
     <input type="submit" value="Delete"/>
 </form>
 </body>
