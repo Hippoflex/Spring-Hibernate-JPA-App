@@ -119,6 +119,4 @@ public class Book {
     public void setDeprecatedBook(boolean deprecatedBook) {
         this.deprecatedBook = deprecatedBook;
     }
-
-    TreeMap treeMap = new TreeMap<>();
 }
