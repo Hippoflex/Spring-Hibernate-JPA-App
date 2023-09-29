@@ -14,6 +14,7 @@
         <setting name="provider-name" value="Hibernate" />
         <datasource-mapping>
           <factory-entry name="SpringHibernateApp" />
+          <factory-entry name="entityManagerFactory" value="afe6dfb6-8bde-44a5-9006-866270d6cd56" />
         </datasource-mapping>
         <naming-strategy-map />
       </configuration>

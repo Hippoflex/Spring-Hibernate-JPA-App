@@ -7,6 +7,7 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import java.util.Date;
+import java.util.TreeMap;
 
 @Entity
 @Table(name = "Book")
@@ -118,4 +119,6 @@ public class Book {
     public void setDeprecatedBook(boolean deprecatedBook) {
         this.deprecatedBook = deprecatedBook;
     }
+
+    TreeMap treeMap = new TreeMap<>();
 }
